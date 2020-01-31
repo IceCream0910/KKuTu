@@ -17,7 +17,6 @@
  */
 
 var Const = require('../../const');
-var TYL = require('./typing_const');
 var Lizard = require('../../sub/lizard');
 var DB;
 var DIC;
@@ -45,8 +44,7 @@ exports.getTitle = function(){
 	var my = this;
 	var i, j;
 	
-	if(my.opts.proverb) pick(TYL.PROVERBS[my.rule.lang]);
-	else DB.kkutu[my.rule.lang].find([ '_id', /^.{2,5}$/ ], [ 'hit', { $gte: 1 } ]).limit(416).on(function($res){
+	DB.kkutu[my.rule.lang].find([ '_id', /^.{2,5}$/ ], [ 'hit', { $gte: 1 } ]).limit(416).on(function($res){
 		pick($res.map(function(item){ return item._id; }));
 	});
 	function pick(list){
